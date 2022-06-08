@@ -24,7 +24,7 @@ public class Info : MonoBehaviour
     
     private void Start()
     {
-        buttonStart.onClick.AddListener(StartSimulate);
+        //buttonStart.onClick.AddListener(StartSimulate);
         _constantForce = GetComponent<ConstantForce>();
         _rigidbody = GetComponent<Rigidbody>();
         if (_constantForce != null)
@@ -45,7 +45,7 @@ public class Info : MonoBehaviour
         buttonStart.gameObject.SetActive(false);
         panelObj.SetActive(true);
         
-        canvas.transform.LookAt(Camera.main.transform);
+        //canvas.transform.LookAt(Camera.main.transform);
         if (_constantForce != null)
         {
             _constantForce.enabled = true;
@@ -57,6 +57,11 @@ public class Info : MonoBehaviour
         }
     }
 
+    public void StopSimulation()
+    {
+        
+    }
+    
     private void Update()
     {
         if (!ReferenceEquals(_rigidbody, null))
