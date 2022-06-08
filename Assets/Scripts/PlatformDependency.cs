@@ -31,7 +31,7 @@ public class PlatformDependency : MonoBehaviour
 #if UNITY_STANDALONE_WIN || UNITY_STANDALONE_LINUX
         SetupPlayer(AndroidPlayer, false);
         SetupPlayer(VRPlayer, false);
-        _activeObject = SetupPlayer(StandalonePplayer, true);
+        ActivePerson = SetupPlayer(StandalonePplayer, true);
 #endif
         
 #if UNITY_EDITOR
