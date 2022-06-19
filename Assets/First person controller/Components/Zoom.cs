@@ -3,7 +3,9 @@
 public class Zoom : MonoBehaviour
 {
     public float sensitivity = 1;
+#pragma warning disable 108,114
     Camera camera;
+#pragma warning restore 108,114
     [HideInInspector]
     public float defaultFOV;
     [Tooltip("Effectively the min FOV that we can reach while zooming with this camera.")]

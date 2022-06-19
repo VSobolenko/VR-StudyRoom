@@ -1,16 +1,13 @@
-using System;
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class LiveButton : MonoBehaviour
 {
-    public  Info _info;
+    public  PhysicsInformation _physicsInformation;
     public  PhysicsObject _physicsObject;
 
     private void Start()
     {
-        _physicsObject.StopSimulation();
+        StopSimulation();
     }
 
     private void OnCollisionEnter(Collision other)
@@ -55,7 +52,22 @@ public class LiveButton : MonoBehaviour
 
     public void StartSimulation()
     {
-        //_info.StartSimulate();
-        _physicsObject.StartSimulation();
+        if (_physicsInformation != null)
+        {
+            _physicsInformation.StartSimulation();
+        }
+
+        if (_physicsObject != null)
+        {
+            _physicsObject.StartSimulation();
+        }
+    }
+
+    public void StopSimulation()
+    {
+        if (_physicsObject != null)
+        {
+            _physicsObject.StopSimulation();
+        }
     }
 }

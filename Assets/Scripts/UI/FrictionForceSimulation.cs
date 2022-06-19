@@ -11,7 +11,7 @@ public class FrictionForceSimulation : PhysicsInformation
     [SerializeField] private Transform alphaGameObject;
     [SerializeField] private TextMeshProUGUI frictionForceInfo;
 
-    protected float Angle => alphaGameObject.rotation.eulerAngles.z;
+    protected float Angle => alphaGameObject.rotation.eulerAngles.z - 90;
     protected float Friction  => ColliderBody.material.dynamicFriction;
     
     protected override void UpdateInfo()
@@ -23,11 +23,11 @@ public class FrictionForceSimulation : PhysicsInformation
             return;
         }
         
-        alphaAngleInfo.text = $"A = {Angle} *";
+        alphaAngleInfo.text = $"A = {Mathf.Abs(Angle)} *";
         frictionCoefficientInfo.text = $"M = {Friction:#.##}";
         
         var force = Friction * Mass * AccelerationOfGravity * Mathf.Cos(Angle);
-        frictionForceInfo.text = $"F = {force:#.##} Н";
+        frictionForceInfo.text = $"F = {Mathf.Abs(force):#.##} Н";
     }
     public void ChangeAngle(bool isUp)
     {
@@ -60,9 +60,20 @@ public class FrictionForceSimulation : PhysicsInformation
 
     protected override void ValidateSetup()
     {
-        alphaAngleInfo = GetComponentsInChildren<TextMeshProUGUI>().FirstOrDefault(x => x.name == "Angle");
-        frictionForceInfo = GetComponentsInChildren<TextMeshProUGUI>().FirstOrDefault(x => x.name == "Friction Force");
-        frictionCoefficientInfo = GetComponentsInChildren<TextMeshProUGUI>().FirstOrDefault(x => x.name == "Friction Coefficient");
+        if (alphaAngleInfo == null)
+        {
+            alphaAngleInfo = GetComponentsInChildren<TextMeshProUGUI>().FirstOrDefault(x => x.name == "Angle");
+        }
+
+        if (frictionForceInfo == null)
+        {
+            frictionForceInfo = GetComponentsInChildren<TextMeshProUGUI>().FirstOrDefault(x => x.name == "Friction Force");
+        }
+
+        if (frictionCoefficientInfo == null)
+        {
+            frictionCoefficientInfo = GetComponentsInChildren<TextMeshProUGUI>().FirstOrDefault(x => x.name == "Friction Coefficient");
+        }
 
         base.ValidateSetup();
     }

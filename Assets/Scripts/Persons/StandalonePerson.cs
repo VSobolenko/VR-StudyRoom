@@ -39,7 +39,7 @@ public class StandalonePerson : MainPerson
             }
         }
 
-        var ray = Camera.main.ScreenPointToRay(new Vector3(x, y));
+        var ray = activeCamera.ScreenPointToRay(new Vector3(x, y));
         if (Physics.Raycast(ray.origin, ray.direction, out var info, 1000f))
         {
             Debug.DrawLine(ray.origin, info.point, Color.red, 5f);

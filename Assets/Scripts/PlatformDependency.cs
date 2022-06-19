@@ -8,7 +8,8 @@ public class PlatformDependency : MonoBehaviour
     public GameObject StandalonePplayer;
 
     public GameObject ActivePerson;
-
+    public Canvas[] activeInfoCanvas;
+    
     public static PlatformDependency Singleton;
     
     private void Awake()
@@ -26,6 +27,10 @@ public class PlatformDependency : MonoBehaviour
         SetupPlayer(VRPlayer, false);
         SetupPlayer(StandalonePplayer, false);
         ActivePerson = SetupPlayer(AndroidPlayer, true);
+        if (ActivePerson.TryGetComponent<MainPerson>(out var activePerson))
+        {
+            SetupCanvasEventCamera(activePerson.activeCamera);
+        }
 #endif
         
 #if UNITY_STANDALONE_WIN || UNITY_STANDALONE_LINUX
@@ -60,5 +65,24 @@ public class PlatformDependency : MonoBehaviour
         }
         
         return player;
+    }
+
+    [ContextMenu("Collect all canvas")]
+    public void CollectAllCanvas()
+    {
+        activeInfoCanvas = GameObject.FindObjectsOfType<Canvas>();
+    }
+    
+    public void SetupCanvasEventCamera(Camera eventCamera)
+    {
+        if (activeInfoCanvas == null)
+        {
+            return;
+        }
+
+        foreach (var activeCanvas in activeInfoCanvas)
+        {
+            activeCanvas.worldCamera = eventCamera;
+        }
     }
 }

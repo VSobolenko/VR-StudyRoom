@@ -4,7 +4,9 @@ public class Jump : MonoBehaviour
 {
     [SerializeField]
     GroundCheck groundCheck;
+#pragma warning disable 108,114
     Rigidbody rigidbody;
+#pragma warning restore 108,114
     public float jumpStrength = 2;
     public event System.Action Jumped;
 

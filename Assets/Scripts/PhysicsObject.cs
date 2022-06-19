@@ -45,6 +45,11 @@ public class PhysicsObject : MonoBehaviour
     
     private void OnValidate()
     {
+        ValidateSetup();
+    }
+    
+    protected virtual void ValidateSetup()
+    {
         if (body == null)
         {
             body = GetComponent<Rigidbody>();
